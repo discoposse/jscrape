@@ -6,7 +6,10 @@ function getDateString() {
     const year = date.getFullYear();
     const month = `${date.getMonth() + 1}`.padStart(2, '0');
     const day =`${date.getDate()}`.padStart(2, '0');
-    return `${year}${month}${day}`
+    const hour = `${date.getHours()}`;
+    const minute = `${date.getMinutes()}`;
+    const second = `${date.getSeconds()}`;
+    return `${year}${month}${day}-${hour}${minute}${second}`
   }  
 
 // Stealth mode time!
@@ -23,35 +26,15 @@ puppeteer.launch({ headless: 'new' }).then(async browser => {
     // Set the page view as a desktop view (or change to mobile dimensions if desired)
     await page.setViewport({ width: 1280, height: 720 }); 
  
-    // Opne the website
+    // Open a headless browser to the website
     await page.goto('https://gtmdelta.com/'); 
  
-    // Wait in case of security check or lazy load
+    // Wait in case of security check 
     await page.waitForTimeout(10000); 
 
-    // Get the date to name our output file
-    scrapedate = datetime.now(*).str
-
     // Take a screenshot of the entire page
-    await page.screenshot({ path: 'gtmdelta-${getDateString()}.png', fullPage: true }); 
-
-    // Get title text 
-    title = await page.evaluate(() => { 
-        return document.querySelector('body > div.nonhystericalbg > div > header > div > h3').textContent; 
-    }); 
- 
-    // Get message text 
-    msg = await page.evaluate(() => { 
-        return document.querySelector('body > div.nonhystericalbg > div > main > h1').textContent; 
-    }); 
- 
-     // get state text 
-    state = await page.evaluate(() => { 
-        return document.querySelector('body > div.nonhystericalbg > div > main > p:nth-child(2)').textContent; 
-     }); 
- 
-    // print to console because we are old school
-    console.log(title, '\n', msg, '\n', state); 
+    path = 'output/gtmdelta_' + getDateString() + '.png'
+    await page.screenshot({ path: path, fullPage: true }); 
  
     // Close the session
     await browser.close(); 

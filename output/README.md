@@ -1,0 +1,1 @@
+This is where your output files go but we don't version the .png files for safety.
