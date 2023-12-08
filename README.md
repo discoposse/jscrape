@@ -7,7 +7,15 @@ This is 100% delivered as-is by someone who is not a programmer :)
 
 # How to run the thing
 
-First thing to do is open up scrape.js and set the web URL and filename in line 4 and line 5. Then just run the file. 
+First thing to do is open up scrape.js and set the web URL and filename in line 4 and line 5. 
+```
+// Pick the website and filename
+website = 'https://gtmdelta.com'
+scrapefilename = 'gtmdelta'
+```
+
+Then just run the file. 
+
 
 ```
 node scrape.js
