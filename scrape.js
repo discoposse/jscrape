@@ -1,5 +1,9 @@
 const puppeteer = require('puppeteer-extra'); 
 
+// Pick the website and filename
+website = 'https://gtmdelta.com'
+scrapefilename = 'gtmdelta'
+
 // Timestamp time
 function getDateString() {
     const date = new Date();
@@ -27,13 +31,13 @@ puppeteer.launch({ headless: 'new' }).then(async browser => {
     await page.setViewport({ width: 1280, height: 720 }); 
  
     // Open a headless browser to the website
-    await page.goto('https://gtmdelta.com/'); 
+    await page.goto(website); 
  
     // Wait in case of security check 
     await page.waitForTimeout(10000); 
 
     // Take a screenshot of the entire page
-    path = 'output/gtmdelta_' + getDateString() + '.png'
+    path = 'output/' + scrapefilename + '-' + getDateString() + '.png'
     await page.screenshot({ path: path, fullPage: true }); 
  
     // Close the session
