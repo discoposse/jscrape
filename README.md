@@ -25,7 +25,6 @@ The process will take a screenshot of the website and store a PNG image under th
 
 Filename format is whatever you set as the scrapefilename variable in line 5 followed by the YYYYMMDD-HHmmss date format.
 
-e.g. gtmdelta-20231207-184247.png
+e.g. gtmdelta-20231207-19437.png
 
-
-
+![example](gtmdelta-20231207-19437.png)
