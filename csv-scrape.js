@@ -1,8 +1,8 @@
 const puppeteer = require('puppeteer-extra'); 
 
 // Pick the website and filename
-website = 'https://gtmdelta.comg'
-scrapefilename = 'gtmdelta-web'
+website = 'https://www.mixbloom.com/pricing'
+scrapefilename = 'mixbloom-pricing'
 
 // Timestamp time
 function getDateString() {

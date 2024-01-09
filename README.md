@@ -28,3 +28,8 @@ Filename format is whatever you set as the scrapefilename variable in line 5 fol
 e.g. gtmdelta-20231207-19437.png
 
 ![example](gtmdelta-20231207-19437.png)
+
+# Features in the backlog
+* Pass a command parameter to the script for the filename and website.
+* Scan a CSV for URLs and scrape them all.
+* Parse an API and scrape all the links.
