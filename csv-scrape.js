@@ -1,45 +1,48 @@
-const puppeteer = require('puppeteer-extra'); 
+const puppeteer = require('puppeteer');
+const fs = require('fs');
+const csv = require('csv-parser');
+const readlines = require('readline');
 
-// Pick the website and filename
-website = 'https://www.mixbloom.com/pricing'
-scrapefilename = 'mixbloom-pricing'
+async function scrape(url, outFile) {
+  puppeteer.launch({ headless: 'new' }).then(async browser => {
+      const page = await browser.newPage();
+      await page.setViewport({ width: 1280, height: 720 });
+      await page.goto(url);
+      await page.waitForTimeout(10000);  // Wait for security checks or page load
+      
+      // Constructing the output file path
+      let path = 'output/' + outFile + '-' + getDateString() + '.png';
+      await page.screenshot({ path: path, fullPage: true });
 
-// Timestamp time
+      await browser.close();
+  });
+}
+
 function getDateString() {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = `${date.getMonth() + 1}`.padStart(2, '0');
-    const day =`${date.getDate()}`.padStart(2, '0');
-    const hour = `${date.getHours()}`;
-    const minute = `${date.getMinutes()}`;
-    const second = `${date.getSeconds()}`;
-    return `${year}${month}${day}-${hour}${minute}${second}`
-  }  
+  const date = new Date();
+  return `${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}${date.getDate().toString().padStart(2, '0')}`;
+}
 
-// Stealth mode time!
-const StealthPlugin = require('puppeteer-extra-plugin-stealth'); 
+async function readCSVAndScrape() {
+  const fileStream = fs.createReadStream('source-urls.csv');
+  const rl = readlines.createInterface({
+      input: fileStream,
+      crlfDelay: Infinity
+  });
 
-// Use stealth 
-puppeteer.use(StealthPlugin()); 
+  let isFirstLine = true;
+  for await (const line of rl) {
+      if (isFirstLine) {
+          isFirstLine = false;  // Skip the header line
+          continue;
+      }
 
-// Launch pupputeer-stealth 
-puppeteer.launch({ headless: 'new' }).then(async browser => { 
-    // Create a new page 
-    const page = await browser.newPage(); 
- 
-    // Set the page view as a desktop view (or change to mobile dimensions if desired)
-    await page.setViewport({ width: 1280, height: 720 }); 
- 
-    // Open a headless browser to the website
-    await page.goto(website); 
- 
-    // Wait in case of security check 
-    await page.waitForTimeout(10000); 
+      const row = line.split(',');
+      console.log('URL:', row[0], 'Outfile:', row[1]);
+      await scrape(row[0], row[1].trim());
+  }
 
-    // Take a screenshot of the entire page
-    path = 'output/' + scrapefilename + '-' + getDateString() + '.png'
-    await page.screenshot({ path: path, fullPage: true }); 
- 
-    // Close the session
-    await browser.close(); 
-});
+  console.log('CSV file successfully processed');
+}
+
+readCSVAndScrape();

@@ -7,6 +7,8 @@ This is 100% delivered as-is by someone who is not a programmer :)
 
 # How to run the thing
 
+## scrape.js - the original way
+
 First thing to do is open up scrape.js and set the web URL and filename in line 4 and line 5. 
 ```
 // Pick the website and filename
@@ -15,7 +17,6 @@ scrapefilename = 'gtmdelta'
 ```
 
 Then just run the file. 
-
 
 ```
 node scrape.js
@@ -29,7 +30,27 @@ e.g. gtmdelta-20231207-19437.png
 
 ![example](gtmdelta-20231207-19437.png)
 
-# Features in the backlog
-* Pass a command parameter to the script for the filename and website.
-* Scan a CSV for URLs and scrape them all.
+## web-scrape.js - pass a url to the script in one command
+
+To use this script, run it from the command line with the desired domain as an argument. For example:
+
+```
+node scrape.js gtmdelta.com
+``` 
+
+This will scrape *https://gtmdelta.com* and save the screenshot with a filename like ```gtm-delta-com-YYYYMMDD-HHMMSS.png``` in the output directory.
+
+
+## csv-scrape.js - the new way with a CSV for bulk scraping
+
+* Rename ```source-urls.csv.example``` to ```source-urls.csv```
+* Update the file using the format "url,outfile" (e.g. "https://gtmdelta.com,gtmdelta")
+* Run the script
+
+```
+node csv-scrape.js
+```
+
+
+## Features in the backlog
 * Parse an API and scrape all the links.
