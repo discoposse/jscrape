@@ -12,7 +12,7 @@ This is 100% delivered as-is by someone who is not a programmer :)
 2. web-scrape.js - pass a url to the script in one command
 3. csv-scrape.js - the new way with a CSV for bulk scraping
 
-Here there are...
+Here are the instructions for each:
 
 
 ## scrape.js - the original way
@@ -62,3 +62,4 @@ node csv-scrape.js
 
 ## Features in the backlog
 * Parse an API and scrape all the links.
+* properly document it all
