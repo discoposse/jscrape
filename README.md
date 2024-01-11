@@ -3,10 +3,10 @@
 
 Welcome to jscrape! A super simple image-output scraping script which uses Puppeteer and the Puppeteer Stealth plugin to help with issues where you may be restricted by robots.txt or some validators.
 
-This is 100% delivered as-is by someone who is not a programmer :)
+This is 100% delivered as-is by someone who is not a programmer :smiley:
 
-## How to run the thing 
-# 
+## How to use
+
 # There are 3 ways to run the process:
 1. scrape.js - the original way with hardcoded url (not recommended but it was the first version)
 2. web-scrape.js - pass a url to the script in one command
