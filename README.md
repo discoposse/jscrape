@@ -41,7 +41,7 @@ e.g. gtmdelta-20231207-19437.png
 To use this script, run it from the command line with the desired domain as an argument. For example:
 
 ```
-node scrape.js gtmdelta.com
+node web-scrape.js gtmdelta.com
 ``` 
 
 This will scrape *https://gtmdelta.com* and save the screenshot with a filename like ```gtm-delta-com-YYYYMMDD-HHMMSS.png``` in the output directory.
